@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Age Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        background-color: #2d3436;
+    }
+    
+    button {
+        margin-top: 5px;
+        align-items: center;
+    }
+    
+    .main-card {
+        margin-top: 10%;
+        background-color: #34495e;
+        color: #fff;
+    }
+    
+    .card-title {
+        padding-bottom: 25px;
+    }
+    
+    @media(max-width:485px) {
+        .main-card {
+            margin-top: 50%;
+        }
+    }
+    
+    #main-result {
+        font-size: 18px;
+    }
+    
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        margin: 0;
+    }
+</style>
+
+<body>
+    <div class="card main-card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title text-center">Age Calculator</h5>
+            <div class="row g-3">
+                <div class="col-sm">
+                    <input type="number" class="form-control" id="date" placeholder="Date" aria-label="City">
+                </div>
+                <div class="col-sm">
+                    <input type="number" class="form-control" id="month" placeholder="Month" aria-label="State">
+                </div>
+                <div class="col-sm">
+                    <input type="number" class="form-control" id="year" placeholder="Year" aria-label="Zip">
+                </div>
+            </div>
+            <div class="d-grid gap-2 col-6 mx-auto pt-4">
+                <button class="btn btn-primary" id="click" onclick="calcu()" type="button">CalCulate</button>
+                <button class="btn btn-primary" id="clear" type="button">Clear Fields</button>
+            </div>
+            <div class="card-body text-center">
+                <h3 id="main-result"></h3>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+    <script>
+        const calcu = () => {
+            let inDate = document.getElementById("date").value
+            let inMonth = document.getElementById("month").value
+            let inYear = document.getElementById("year").value
+
+            if (inDate === "" || inMonth === "" || inYear === "") {
+                alert("Enter Valid Input")
+            } else {
+                calculateAge();
+            }
+        }
+        clear.addEventListener("click", () => {
+            let inDate = document.getElementById("date").value
+            let inMonth = document.getElementById("month").value
+            let inYear = document.getElementById("year").value
+            inMonth = ""
+            inDate = ""
+            inYear = ""
+            document.getElementById("main-result").innerText = ""
+                // mainResultShow.innerText = ""
+
+        })
+        const calculateAge = () => {
+            let inDate = document.getElementById("date").value
+            let inMonth = document.getElementById("month").value
+            let inYear = document.getElementById("year").value
+            let clear = document.getElementById("clear");
+
+            let date = new Date();
+            let d1 = date.getDate()
+            let m1 = 1 + date.getMonth()
+            let y1 = date.getFullYear()
+            let month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+
+            if (inDate > d1) {
+                d1 = d1 + month[m1 - 1]
+                m1 = m1 - 1;
+            };
+
+            if (inMonth > m1) {
+                m1 = m1 + 12;
+                y1 = y1 - 1
+            }
+
+            let d = d1 - inDate
+            let m = m1 - inMonth
+            let y = y1 - inYear
+
+            document.getElementById("main-result").innerText = `You Are ${y} Years,${m} Month,and ${d} Days Old`
+        }
+    </script>
+
+</body>
+
+</html>
